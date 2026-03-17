@@ -218,6 +218,24 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- ZK Keymaps
+local opts = { noremap = true, silent = false }
+-- Create a new note after asking for its title.
+vim.keymap.set('n', '<leader>zn', "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", { desc = 'Create new note with Title input' })
+-- Open notes.
+vim.keymap.set('n', '<leader>zo', "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", { desc = 'Open notes (sorted by recently modified)' })
+-- Open notes associated with the selected tags.
+vim.keymap.set('n', '<leader>zt', '<Cmd>ZkTags<CR>', { desc = 'Open notes with associated tags' })
+-- Search for the notes matching a given query.
+vim.keymap.set(
+  'n',
+  '<leader>zf',
+  "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
+  { desc = 'Find notes matching a given query' }
+)
+-- Search for the notes matching the current visual selection.
+vim.keymap.set('v', '<leader>zf', ":'<,'>ZkMatch<CR>", { desc = 'Find notes matching current visual selection' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
